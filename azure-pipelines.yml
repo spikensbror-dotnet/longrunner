@@ -7,14 +7,14 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    arguments: '-c $(BuildConfiguration)'
+    arguments: '-c Release'
     feedsToUse: 'select'
     versioningScheme: 'off'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    arguments: '-c $(BuildConfiguration)'
+    arguments: '-c Release'
     feedsToUse: 'select'
     versioningScheme: 'off'
 
