@@ -5,6 +5,7 @@ steps:
 - checkout: self
 
 - task: DotNetCoreCLI@2
+  name: 'Build'
   inputs:
     command: 'build'
     arguments: '-c Release'
@@ -13,6 +14,7 @@ steps:
     versioningScheme: 'off'
 
 - task: DotNetCoreCLI@2
+  name: 'Tests'
   inputs:
     command: 'test'
     arguments: '-c Release'
@@ -21,6 +23,7 @@ steps:
     versioningScheme: 'off'
 
 - task: DotNetCoreCLI@2
+  name: 'Pack'
   inputs:
     command: 'pack'
     configuration: 'Release'
