@@ -8,18 +8,18 @@ steps:
 - task: MSBuild@1
   displayName: Restore
   inputs:
-    solution: FastRunner.sln
+    solution: LongRunner.sln
     msbuildArguments: /t:Restore /p:Configuration=Release /m
 
 - task: MSBuild@1
   displayName: Build
   inputs:
-    solution: FastRunner.sln
+    solution: LongRunner.sln
     msbuildArguments: /p:PackOnBuild=true /p:Configuration=Release
 
 - task: VSTest@2
   displayName: Test
   inputs:
-    testAssemblyVer2: FastRunner.Tests\bin\*\*.Tests.dll
+    testAssemblyVer2: LongRunner.Tests\bin\*\*.Tests.dll
     diagnosticsEnabled: false
     rerunFailedTests: false
