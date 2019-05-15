@@ -7,22 +7,22 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    arguments: '-c Release'
+    configuration: 'Release'
     feedsToUse: 'select'
     versioningScheme: 'off'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    arguments: '-c Release'
+    configuration: 'Release'
     feedsToUse: 'select'
     versioningScheme: 'off'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
-    arguments: '-c Release'
+    configuration: 'Release'
     feedsToUse: 'select'
-    packagesToPack: 'LongRunner\LongRunner.csproj'
+    packagesToPack: 'LongRunner/LongRunner.csproj'
     nobuild: true
     versioningScheme: 'off'
