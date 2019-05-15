@@ -1,4 +1,5 @@
 pool: Hosted Windows 2019 with VS2019
+name: 1.0.$(Rev:.r)
 
 steps:
 
