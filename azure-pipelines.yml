@@ -3,23 +3,17 @@ pool: Hosted Windows 2019 with VS2019
 steps:
 
 - checkout: self
-  clean: true
 
-- task: MSBuild@1
-  displayName: Restore
+- task: DotNetCoreCLI@2
   inputs:
-    solution: LongRunner.sln
-    msbuildArguments: /t:Restore /p:Configuration=Release /m
+    command: 'build'
+    arguments: '-c Release'
+    feedsToUse: 'select'
+    versioningScheme: 'off'
 
-- task: MSBuild@1
-  displayName: Build
+- task: DotNetCoreCLI@2
   inputs:
-    solution: LongRunner.sln
-    msbuildArguments: /p:PackOnBuild=true /p:Configuration=Release
-
-- task: VSTest@2
-  displayName: Test
-  inputs:
-    testAssemblyVer2: LongRunner.Tests\bin\*\*\*.Tests.dll
-    diagnosticsEnabled: false
-    rerunFailedTests: false
+    command: 'test'
+    arguments: '-c Release'
+    feedsToUse: 'select'
+    versioningScheme: 'off'
