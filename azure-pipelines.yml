@@ -22,12 +22,19 @@ steps:
     feedsToUse: 'select'
     versioningScheme: 'off'
 
-- task: DotNetCoreCLI@2
-  name: 'Pack'
+- task: NuGetCommand@2
   inputs:
     command: 'pack'
-    configuration: 'Release'
     feedsToUse: 'select'
-    packagesToPack: 'LongRunner/LongRunner.csproj'
-    nobuild: true
+    packagesToPack: '**/*.csproj'
+    configuration: 'Release'
+    versioningScheme: 'byBuildNumber'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    feedsToUse: 'select'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'cyaspik'
     versioningScheme: 'off'
