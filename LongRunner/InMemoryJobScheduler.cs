@@ -19,9 +19,20 @@ namespace LongRunner
             return this.scheduledJobs.ToArray();
         }
 
-        public void Schedule<TJob>(string cron) where TJob : ILongJob
+        public void Schedule<TJob>(string cron, DateTimeOffset? runAtUtc = null) where TJob : ILongJob
         {
-            this.scheduledJobs.Add(new ScheduledJob(this.jobActivator.Activate(typeof(TJob)), cron));
+            this.scheduledJobs.Add(new ScheduledJob(this.jobActivator.Activate(typeof(TJob)), cron)
+            {
+                RunAtUtc = runAtUtc,
+            });
+        }
+
+        public void Schedule<TJob>(DateTimeOffset runAtUtc) where TJob : ILongJob
+        {
+            this.scheduledJobs.Add(new ScheduledJob(this.jobActivator.Activate(typeof(TJob)), null)
+            {
+                RunAtUtc = runAtUtc,
+            });
         }
 
         public void Unschedule(ILongScheduledJob scheduledJob)

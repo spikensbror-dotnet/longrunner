@@ -1,5 +1,6 @@
 ﻿using LongRunner;
 using LongRunner.Autofac;
+using System.Reflection;
 
 namespace Autofac
 {
@@ -17,6 +18,15 @@ namespace Autofac
 
             // Resolve JobStartup so that it lives along with the container.
             builder.RegisterBuildCallback(c => c.Resolve<JobStartup>());
+        }
+
+        public static void RegisterLongJobs(this ContainerBuilder builder, params Assembly[] assemblies)
+        {
+            builder.RegisterAssemblyTypes(assemblies)
+                .Where(t => t.IsAssignableTo<ILongJob>())
+                .AsSelf()
+                .As<ILongJob>()
+                .SingleInstance();
         }
     }
 }
