@@ -21,6 +21,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
+    arguments: '-c Release'
     feedsToUse: 'select'
     packagesToPack: 'LongRunner\LongRunner.csproj'
     nobuild: true
