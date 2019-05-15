@@ -20,6 +20,6 @@ steps:
 - task: VSTest@2
   displayName: Test
   inputs:
-    testAssemblyVer2: LongRunner.Tests\bin\**\*.Tests.dll
+    testAssemblyVer2: LongRunner.Tests\bin\*\*\*.Tests.dll
     diagnosticsEnabled: false
     rerunFailedTests: false
