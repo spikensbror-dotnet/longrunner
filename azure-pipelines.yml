@@ -14,7 +14,7 @@ steps:
     feedsToUse: 'select'
     versioningScheme: 'off'
 
-- task: VSTests@2
+- task: VSTest@2
   name: 'Tests'
   inputs:
     testSelector: 'testAssemblies'
