@@ -1,43 +1,62 @@
 pool: Hosted Windows 2019 with VS2019
 name: 1.0.0$(Rev:.r)
+variables:
+  projectName: 'LongRunner'
 
 steps:
 
 - checkout: self
 
-- task: DotNetCoreCLI@2
-  name: 'Build'
+- task: NuGetToolInstaller@1
+  displayName: 'Ensure latest version of NuGet'
   inputs:
-    command: 'build'
-    arguments: '-c Release'
-    configuration: 'Release'
-    feedsToUse: 'select'
-    versioningScheme: 'off'
+    versionSpec: 
+    checkLatest: true
+
+- script: dotnet build -c Release
+  displayName: 'Build'
 
 - task: VSTest@2
-  name: 'Tests'
+  displayName: 'Tests'
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: '*/bin/*/*/*.Tests.dll'
     searchFolder: '$(System.DefaultWorkingDirectory)'
-    codeCoverageEnabled: true
-    runSettingsFile: 'Production.runsettings'
+    runInParallel: true
+    runTestsInIsolation: true
 
-- task: DotNetCoreCLI@2
-  name: 'Pack'
+- script: dotnet test $(System.DefaultWorkingDirectory)/$(projectName).Tests/$(projectName).Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+  displayName: 'Code coverage'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish coverage results'
+  inputs:
+    codeCoverageTool: 'cobertura'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/$(projectName).Tests/coverage.cobertura.xml'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet pack for $(projectName)'
   inputs:
     command: 'pack'
     feedsToUse: 'select'
-    packagesToPack: '**/*.csproj'
+    packagesToPack: '$(projectName)/*.csproj'
     configuration: 'Release'
+    packDestination: '$(Build.ArtifactStagingDirectory)/packages'
+    versioningScheme: 'byBuildNumber'
+    
+- task: NuGetCommand@2
+  displayName: 'NuGet pack for $(projectName).Autofac'
+  inputs:
+    command: 'pack'
+    feedsToUse: 'select'
+    packagesToPack: '$(projectName).Autofac/*.csproj'
+    configuration: 'Release'
+    packDestination: '$(Build.ArtifactStagingDirectory)/packages'
     versioningScheme: 'byBuildNumber'
 
-- task: DotNetCoreCLI@2
-  name: 'Push'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish packages artifact'
   inputs:
-    command: 'push'
-    feedsToUse: 'select'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: 'Packages'
-    versioningScheme: 'off'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/packages'
+    ArtifactName: 'packages'
+    publishLocation: 'Container'
