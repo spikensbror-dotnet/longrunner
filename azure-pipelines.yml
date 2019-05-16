@@ -5,6 +5,12 @@ steps:
 
 - checkout: self
 
+- task: NuGetToolInstaller@1
+  name: 'EnsureLatestNuGetTools'
+  inputs:
+    versionSpec: 
+    checkLatest: true
+
 - task: DotNetCoreCLI@2
   name: 'Build'
   inputs:
@@ -23,21 +29,19 @@ steps:
     codeCoverageEnabled: true
     runSettingsFile: 'Production.runsettings'
 
-- task: DotNetCoreCLI@2
+- task: NuGetCommand@2
   name: 'Pack'
   inputs:
     command: 'pack'
     feedsToUse: 'select'
-    packagesToPack: '**/*.csproj'
+    packagesToPack: 'LongRunner/*.csproj'
     configuration: 'Release'
+    packDestination: '$(Build.ArtifactStagingDirectory)/packages'
     versioningScheme: 'byBuildNumber'
 
-- task: DotNetCoreCLI@2
-  name: 'Push'
+- task: PublishBuildArtifacts@1
+  name: 'PublishArtifacts'
   inputs:
-    command: 'push'
-    feedsToUse: 'select'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: 'Packages'
-    versioningScheme: 'off'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/packages'
+    ArtifactName: 'packages'
+    publishLocation: 'Container'
