@@ -30,7 +30,7 @@ steps:
     runSettingsFile: 'Production.runsettings'
 
 - task: NuGetCommand@2
-  name: 'Pack'
+  name: 'PackLongRunner'
   inputs:
     command: 'pack'
     feedsToUse: 'select'
@@ -40,7 +40,7 @@ steps:
     versioningScheme: 'byBuildNumber'
 
 - task: NuGetCommand@2
-  name: 'Pack'
+  name: 'PackLongRunnerAutofac'
   inputs:
     command: 'pack'
     feedsToUse: 'select'
