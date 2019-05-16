@@ -39,6 +39,16 @@ steps:
     packDestination: '$(Build.ArtifactStagingDirectory)/packages'
     versioningScheme: 'byBuildNumber'
 
+- task: NuGetCommand@2
+  name: 'Pack'
+  inputs:
+    command: 'pack'
+    feedsToUse: 'select'
+    packagesToPack: 'LongRunner.Autofac/*.csproj'
+    configuration: 'Release'
+    packDestination: '$(Build.ArtifactStagingDirectory)/packages'
+    versioningScheme: 'byBuildNumber'
+
 - task: PublishBuildArtifacts@1
   name: 'PublishArtifacts'
   inputs:
