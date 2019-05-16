@@ -10,6 +10,9 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Code coverage files
+coverage.cobertura.xml
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
