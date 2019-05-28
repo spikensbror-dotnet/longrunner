@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Kimmy Andersson</Authors>
+    <Description>Autofac activation, discovery and lifetime management for LongRunner.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/spikensbror-dotnet/longrunner</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
