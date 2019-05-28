@@ -15,7 +15,7 @@ namespace LongRunner.Tests
             FireAndForgetJob.Invokations = 0;
         }
 
-        [TestMethod]
+        [TestMethod, Timeout(3000)]
         public void ShouldBeAbleToScheduleAndRunJobs()
         {
             var scheduler = LongJobs.CreateScheduler();
@@ -29,7 +29,13 @@ namespace LongRunner.Tests
             {
                 scheduler.Schedule<FireAndForgetJob>(DateTimeOffset.UtcNow);
 
-                Thread.Sleep(1000);
+                while (CronJob.Invokations == 0 &&
+                    FireAndForgetJob.Invokations == 0)
+                {
+                    Thread.Sleep(100);
+                }
+
+                Thread.Sleep(500);
 
                 Assert.AreEqual(1, CronJob.Invokations);
                 Assert.AreEqual(1, FireAndForgetJob.Invokations);
