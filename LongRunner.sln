@@ -9,7 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LongRunner.Autofac", "LongR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LongRunner.ExampleApp", "LongRunner.ExampleApp\LongRunner.ExampleApp.csproj", "{B5629607-348A-4094-BC07-C88EF974D932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LongRunner.Tests", "LongRunner.Tests\LongRunner.Tests.csproj", "{0966D2C7-5047-4D1C-A7E3-DBEA8D83E9E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LongRunner.Tests", "LongRunner.Tests\LongRunner.Tests.csproj", "{0966D2C7-5047-4D1C-A7E3-DBEA8D83E9E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBC23237-E40D-46CB-93B4-D4B7D3D12577}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+		LICENSE = LICENSE
+		Production.runsettings = Production.runsettings
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

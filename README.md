@@ -10,3 +10,17 @@ LongRunner is an open-source and lightweight .NET background job engine for long
 ## LongRunner.Autofac
 
 [![NuGet LongRunner.Autofac](https://img.shields.io/nuget/v/LongRunner.Autofac.svg)](https://www.nuget.org/packages/LongRunner.Autofac/)
+
+## Examples
+
+### Basic usage
+
+See [BasicUsageProgram.cs](LongRunner.ExampleApp/BasicUsageProgram.cs).
+
+### Autofac
+
+See [AutofacProgram.cs](LongRunner.ExampleApp/AutofacProgram.cs).
+
+### Custom activator
+
+See [CustomActivatorProgram.cs](LongRunner.ExampleApp/CustomActivatorProgram.cs).
