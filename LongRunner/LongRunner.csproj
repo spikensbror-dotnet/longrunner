@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Kimmy Andersson</Authors>
+    <Authors>spikensbror</Authors>
     <Description>LongRunner is an open-source and lightweight .NET background job engine for long-executing background jobs scheduled using cron expressions.</Description>
     <PackageProjectUrl>https://github.com/spikensbror-dotnet/longrunner</PackageProjectUrl>
     <RepositoryUrl>https://github.com/spikensbror-dotnet/longrunner</RepositoryUrl>
